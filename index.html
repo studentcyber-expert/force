@@ -12,18 +12,7 @@
       padding: 20px;
     }
     .step {
-      display: none;
       margin-bottom: 20px;
-    }
-    .step.active {
-      display: block;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
     }
     button {
       background: #0f0;
@@ -32,6 +21,13 @@
       border-radius: 5px;
       cursor: pointer;
       margin-top: 20px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
     }
     video, canvas {
       display: block;
@@ -43,7 +39,7 @@
   <h1>SCEF Join Form</h1>
   <form id="scefForm">
     <!-- Step 1: Name -->
-    <div class="step active" id="step1">
+    <div class="step" id="step1">
       <label for="name">আপনার নাম:</label>
       <input type="text" name="name" id="name" required />
       <button type="button" onclick="nextStep(2)">পরবর্তী</button>
@@ -145,9 +141,7 @@
     let currentStep = 1;
 
     function nextStep(step) {
-      // Hide the current step but keep it in the page flow
-      document.getElementById(`step${currentStep}`).classList.remove('active');
-      document.getElementById(`step${step}`).classList.add('active');
+      // Directly change to the next step
       currentStep = step;
     }
 
