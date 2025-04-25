@@ -109,9 +109,8 @@
 
   <!-- Step 6 -->
   <div class="form-group" id="step6">
-    <label for="mobile">মোবাইল নম্বর:</label>
-    <input type="text" id="mobile" name="mobile" placeholder="আপনার ফোন নম্বর লিখুন" required maxlength="11" oninput="validateMobile(this)">
-    <p class="note" id="mobileError" style="display:none;">সঠিক ১১ ডিজিটের নম্বর দিন (শুধু সংখ্যা)</p>
+    <label for="parent_mobile">মোবাইল নম্বর:</label>
+    <input type="text" id="parent_mobile" name="parent_mobile" placeholder="আপনার মোবাইল নম্বর লিখুন" required oninput="showStep(7)">
   </div>
 
   <!-- Step 7 -->
@@ -135,7 +134,7 @@
   <!-- Step 10 -->
   <div class="form-group" id="step11">
     <label for="verification">টিম এর verification ফেসবুক প্রোফাইল  এর জন্য টিম এর লোগো অ্যাড করতে রাজি আছি:</label>
-    <input type="text" id="verification" name="verification" placeholder="হ্যা আমি সম্মতি আছি" required oninput="showStep(12)">
+    <input type="text" id="verification" name="verification" placeholder="হ্যা আমি সম্মতি আছি/আমি এই বিষয়ে কথা বলতে চাই" required oninput="showStep(12)">
   </div>
 
   <!-- Step 11 -->
@@ -162,7 +161,7 @@
   
   <!-- Step 14 -->
   <div class="form-group" id="step15">
-    <label for="oath_video">ভিডিও শপত:</label>
+    <label for="oath_video">অবশই আপনাকে এই শপথ টি পাঠ করে ভিডিও করে জমা দিতে হবে:আমি, বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, Student Cyber Expert Force-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক। আমি মহান আল্লাহর নামে শপথ করছি যে, আমি কখনো কোনো অনৈতিক ও অবৈধ সাইবার কার্যকলাপে যুক্ত হব না। আমি সর্বদা ইসলাম ও আমার প্রিয় মাতৃভূমি বাংলাদেশের সাইবার নিরাপত্তা রক্ষায় সচেষ্ট থাকব এবং অপরাধ দমন ও মানুষের সেবা করতে সর্বোচ্চ চেষ্টা করব।:</label>
     <input type="file" id="oath_video" name="oath_video" accept="video/*" required oninput="showStep(16)">
   </div>
 
