@@ -1,177 +1,201 @@
+
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SCEF Join Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCEF Joining Form</title> 
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f0f0f;
-      color: #fff;
+    body { 
+      font-family: "Courier New", Courier, monospace; 
+      background-color: #0f1117; 
+      color: #39ff14; 
       padding: 20px;
     }
-    .step {
+    h2 { 
+      text-align: center; 
+      color: #00ff00;
+      font-size: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    form { 
+      background: #1a1a1a; 
+      padding: 30px; 
+      border-radius: 10px; 
+      width: 60%;
+      margin: 0 auto; 
+      box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
+    }
+    .form-group {
+      display: none;
       margin-bottom: 20px;
     }
-    button {
-      background: #0f0;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    .form-group.visible { 
+      display: block; 
+    }
+    label { 
+      font-size: 18px; 
+      margin-bottom: 10px; 
+    }
+    input, textarea {
+      width: 100%; 
+      padding: 10px; 
+      margin: 5px 0 20px 0;
+      border: 1px solid #39ff14; 
+      border-radius: 5px; 
+      background-color: #333;
+      color: #39ff14;
+    }
+    button { 
+      padding: 10px 20px; 
+      background: #39ff14; 
+      color: black; 
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      font-size: 18px; 
+      width: 100%;
+    }
+    button:hover { 
+      background: #00e600; 
+    }
+    .note { 
+      font-size: 14px; 
+      color: red; 
+    }
+    .checkbox-group {
       margin-top: 20px;
     }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-    video, canvas {
-      display: block;
-      margin-top: 10px;
+    .checkbox-group input {
+      width: auto;
+      margin-right: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>SCEF Join Form</h1>
-  <form id="scefForm">
-    <!-- Step 1: Name -->
-    <div class="step" id="step1">
-      <label for="name">আপনার নাম:</label>
-      <input type="text" name="name" id="name" required />
-      <button type="button" onclick="nextStep(2)">পরবর্তী</button>
+
+<h2>SCEF Joining Form</h2>
+<form id="scefForm" method="POST" action="submit.php" enctype="multipart/form-data">
+
+  <!-- Step 1 -->
+  <div class="form-group visible" id="step1">
+    <label for="name">আপনার নাম:</label>
+    <input type="text" id="name" name="name" placeholder="আপনার পুরো নাম দিন" required oninput="showStep(2)">
+  </div>
+
+  <!-- Step 2 -->
+  <div class="form-group" id="step2">
+    <label for="father_name">পিতার নাম:</label>
+    <input type="text" id="father_name" name="father_name" placeholder="আপনার বাবার নাম দিন" required oninput="showStep(3)">
+  </div>
+
+  <!-- Step 3 -->
+  <div class="form-group" id="step3">
+    <label for="address">বর্তমান ঠিকানা:</label>
+    <textarea id="address" name="address" placeholder="বর্তমান ঠিকানা লিখুন" required oninput="showStep(4)"></textarea>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="form-group" id="step4">
+    <label for="permanent_address">স্থায়ী ঠিকানা:</label>
+    <textarea id="permanent_address" name="permanent_address" placeholder="স্থায়ী ঠিকানা লিখুন" required oninput="showStep(5)"></textarea>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="form-group" id="step5">
+    <label for="email">ইমেইল:</label>
+    <input type="email" id="email" name="email" placeholder="ইমেইল লিখুন" required pattern=".+@gmail\.com" oninput="showStep(6)">
+  </div>
+
+  <!-- Step 6 -->
+  <div class="form-group" id="step6">
+    <label for="mobile">মোবাইল নম্বর:</label>
+    <input type="text" id="mobile" name="mobile" placeholder="আপনার ফোন নম্বর লিখুন" required maxlength="11" oninput="validateMobile(this)">
+    <p class="note" id="mobileError" style="display:none;">সঠিক ১১ ডিজিটের নম্বর দিন (শুধু সংখ্যা)</p>
+  </div>
+
+  <!-- Step 7 -->
+  <div class="form-group" id="step7">
+    <label for="parent_mobile">অভিবাকের মোবাইল নম্বর:</label>
+    <input type="text" id="parent_mobile" name="parent_mobile" placeholder="অভিবাকের মোবাইল নম্বর লিখুন" required oninput="showStep(8)">
+  </div>
+
+  <!-- Step 8 -->
+  <div class="form-group" id="step8">
+    <label for="previous_team">পূর্বে কোন টিম এ কাজ করেছেন : (করে থাকলে টিম এর নাম লিখুন)</label>
+    <input type="text" id="previous_team" name="previous_team" placeholder="টিমের নাম লিখুন" oninput="showStep(9)">
+  </div>
+
+  <!-- Step 9 -->
+  <div class="form-group" id="step9">
+    <label for="facebook_link">ফেসবুক একাউন্ট লিংক :</label>
+    <input type="url" id="facebook_link" name="facebook_link" placeholder="ফেসবুক লিংক দিন" required oninput="showStep(10)">
+  </div>
+
+  <!-- Step 10 -->
+  <div class="form-group" id="step10">
+    <label for="verification">টিম এর verification ফেসবুক প্রোফাইল  এর জন্য টিম এর লোগো অ্যাড করতে রাজি আছি:</label>
+    <input type="text" id="verification" name="verification" placeholder="হ্যা আমি সম্মতি আছি" required oninput="showStep(11)">
+  </div>
+
+  <!-- Step 11 -->
+  <div class="form-group" id="step11">
+    <label for="birth_certificate">জন্ম নিবন্ধন নম্বর:</label>
+    <input type="text" id="birth_certificate" name="birth_certificate" placeholder="জন্ম নিবন্ধন নম্বর দিন" required oninput="showStep(12)">
+  </div>
+
+  <!-- Step 12 -->
+  <div class="form-group" id="step12">
+    <label for="birth_date">জন্ম তারিখ:</label>
+    <input type="date" id="birth_date" name="birth_date" required oninput="showStep(13)">
+  </div>
+
+  <!-- Step 13 -->
+  <div class="form-group" id="step13">
+    <label for="selfie">ফটোসেল্ফি (লাইভ ফেস সহ):</label>
+    <input type="file" id="selfie" name="selfie" accept="image/*" required oninput="showStep(14)">
+  </div>
+
+  <!-- Step 14 -->
+  <div class="form-group" id="step14">
+    <label for="oath_video">ভিডিও শপত:</label>
+    <input type="file" id="oath_video" name="oath_video" accept="video/*" required oninput="showStep(15)">
+  </div>
+
+  <!-- Step 15 (with checkbox and submit) -->
+  <div class="form-group" id="step15">
+    <label>আমি টিমের প্রতি সর্বদা সম্মান বা শ্রদ্ধা বজায় রাখবো, এবং টিমের সকল আইন মেনে চলবো। আমি নিশ্চিত যে, আমি যেকোনো পরিস্থিতিতে টিমের সুনাম রক্ষা করবো এবং সকল সদস্যের প্রতি সহানুভূতি ও সমর্থন দেখাবো। এই বিষয়ে সম্মতি প্রদান করছি:</label>
+    <div class="checkbox-group">
+      <input type="checkbox" id="teamRespectConsent" name="teamRespectConsent">
+      <label for="teamRespectConsent">হ্যাঁ, আমি সম্মত আছি</label>
     </div>
+    <button type="submit">✅ জমা দিন</button>
+  </div>
 
-    <!-- Step 2: Father's Name -->
-    <div class="step" id="step2">
-      <label for="fatherName">পিতার নাম:</label>
-      <input type="text" name="fatherName" id="fatherName" required />
-      <button type="button" onclick="nextStep(3)">পরবর্তী</button>
-    </div>
+</form>
 
-    <!-- Step 3: Current & Permanent Address -->
-    <div class="step" id="step3">
-      <label for="currentAddress">বর্তমান ঠিকানা:</label>
-      <input type="text" name="currentAddress" id="currentAddress" required />
-      
-      <label for="permanentAddress">স্থায়ী ঠিকানা:</label>
-      <input type="text" name="permanentAddress" id="permanentAddress" required />
-      <button type="button" onclick="nextStep(4)">পরবর্তী</button>
-    </div>
+<script>
+  function showStep(step) {
+    document.getElementById("step" + step).classList.add("visible");
+  }
 
-    <!-- Step 4: Mobile Number -->
-    <div class="step" id="step4">
-      <label for="mobile">মোবাইল নম্বর (১১ ডিজিট):</label>
-      <input type="tel" name="mobile" id="mobile" pattern="[0-9]{11}" required />
-      <button type="button" onclick="nextStep(5)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 5: Email -->
-    <div class="step" id="step5">
-      <label for="email">ইমেইল (only @gmail.com):</label>
-      <input type="email" name="email" id="email" required />
-      <button type="button" onclick="nextStep(6)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 6: Guardian's Mobile Number -->
-    <div class="step" id="step6">
-      <label for="guardianMobile">অভিবাকের মোবাইল নম্বর:</label>
-      <input type="tel" name="guardianMobile" id="guardianMobile" pattern="[0-9]{11}" required />
-      <button type="button" onclick="nextStep(7)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 7: Team Experience -->
-    <div class="step" id="step7">
-      <label for="teamExperience">পূর্বে কোন টিম এ কাজ করেছেন:</label>
-      <input type="text" name="teamExperience" id="teamExperience" />
-      <button type="button" onclick="nextStep(8)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 8: Facebook Account Link -->
-    <div class="step" id="step8">
-      <label for="facebookLink">ফেসবুক একাউন্ট লিংক (fake account গ্রহনযোগ্য নয়):</label>
-      <input type="url" name="facebookLink" id="facebookLink" required />
-      <button type="button" onclick="nextStep(9)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 9: Facebook Profile Verification -->
-    <div class="step" id="step9">
-      <label for="facebookLogo">টিম এর verification ফেসবুক প্রোফাইল এর জন্য টিম এর লোগো অ্যাড করতে রাজি আছি:</label>
-      <input type="checkbox" name="facebookLogo" id="facebookLogo" required />
-      <button type="button" onclick="nextStep(10)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 10: Birth Registration Number -->
-    <div class="step" id="step10">
-      <label for="birthRegNumber">জন্ম নিবন্ধন নম্বর:</label>
-      <input type="text" name="birthRegNumber" id="birthRegNumber" required />
-      <button type="button" onclick="nextStep(11)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 11: Date of Birth -->
-    <div class="step" id="step11">
-      <label for="dob">জন্ম তারিখ (নিবন্ধনের সাথে মিল থাকা উচিত):</label>
-      <input type="date" name="dob" id="dob" required />
-      <button type="button" onclick="nextStep(12)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 12: Selfie Capture -->
-    <div class="step" id="step12">
-      <label>আপনার সেলফি (ক্যামেরা চালু করুন ও ক্যাপচার করুন):</label>
-      <video id="video" width="320" height="240" autoplay></video>
-      <button type="button" onclick="capturePhoto()">📷 ক্যাপচার</button>
-      <canvas id="canvas" width="320" height="240"></canvas>
-      <input type="hidden" name="photo" id="photo" />
-      <button type="button" onclick="nextStep(13)">পরবর্তী</button>
-    </div>
-
-    <!-- Step 13: Video Upload -->
-    <div class="step" id="step13">
-      <label>ভিডিও শপথ:</label>
-      <textarea readonly>আমি (আপনার নাম), বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, Student Cyber Expert Force-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক...</textarea>
-      <input type="file" name="video" accept="video/*" required />
-      <button type="submit">সাবমিট</button>
-    </div>
-  </form>
-
-  <script>
-    let currentStep = 1;
-
-    function nextStep(step) {
-      // Directly change to the next step
-      currentStep = step;
+  function validateMobile(input) {
+    const mobile = input.value.replace(/\D/g, '');
+    input.value = mobile;
+    const error = document.getElementById('mobileError');
+    if (mobile.length === 11) {
+      error.style.display = 'none';
+      showStep(7);
+    } else {
+      error.style.display = 'block';
     }
+  }
+</script>
 
-    // Camera capture
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const photoInput = document.getElementById('photo');
-
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
-        })
-        .catch(function (error) {
-          alert("ক্যামেরা চালু করা যাচ্ছে না");
-        });
-    }
-
-    function capturePhoto() {
-      const context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, 320, 240);
-      const dataURL = canvas.toDataURL('image/png');
-      photoInput.value = dataURL;
-    }
-
-    document.getElementById("scefForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("✅ সাবমিট সম্পন্ন। আপনার ভেরিফিকেশন প্রক্রিয়া চলতেছে। ইমেইল চেক করুন!");
-      // এখানে Google Apps Script বা webhook call করে submit data পাঠানো যাবে
-    });
-  </script>
 </body>
 </html>
+
+
+
