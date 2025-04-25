@@ -42,25 +42,98 @@
 <body>
   <h1>SCEF Join Form</h1>
   <form id="scefForm">
+    <!-- Step 1: Name -->
     <div class="step active" id="step1">
-      <label>আপনার নাম:</label>
-      <input type="text" name="name" required />
+      <label for="name">আপনার নাম:</label>
+      <input type="text" name="name" id="name" required />
       <button type="button" onclick="nextStep(2)">পরবর্তী</button>
     </div>
+
+    <!-- Step 2: Father's Name -->
     <div class="step" id="step2">
-      <label>অভিভাবকের নাম:</label>
-      <input type="text" name="guardian" required />
+      <label for="fatherName">পিতার নাম:</label>
+      <input type="text" name="fatherName" id="fatherName" required />
       <button type="button" onclick="nextStep(3)">পরবর্তী</button>
     </div>
+
+    <!-- Step 3: Current & Permanent Address -->
     <div class="step" id="step3">
+      <label for="currentAddress">বর্তমান ঠিকানা:</label>
+      <input type="text" name="currentAddress" id="currentAddress" required />
+      
+      <label for="permanentAddress">স্থায়ী ঠিকানা:</label>
+      <input type="text" name="permanentAddress" id="permanentAddress" required />
+      <button type="button" onclick="nextStep(4)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 4: Mobile Number -->
+    <div class="step" id="step4">
+      <label for="mobile">মোবাইল নম্বর (১১ ডিজিট):</label>
+      <input type="tel" name="mobile" id="mobile" pattern="[0-9]{11}" required />
+      <button type="button" onclick="nextStep(5)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 5: Email -->
+    <div class="step" id="step5">
+      <label for="email">ইমেইল (only @gmail.com):</label>
+      <input type="email" name="email" id="email" required />
+      <button type="button" onclick="nextStep(6)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 6: Guardian's Mobile Number -->
+    <div class="step" id="step6">
+      <label for="guardianMobile">অভিবাকের মোবাইল নম্বর:</label>
+      <input type="tel" name="guardianMobile" id="guardianMobile" pattern="[0-9]{11}" required />
+      <button type="button" onclick="nextStep(7)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 7: Team Experience -->
+    <div class="step" id="step7">
+      <label for="teamExperience">পূর্বে কোন টিম এ কাজ করেছেন:</label>
+      <input type="text" name="teamExperience" id="teamExperience" />
+      <button type="button" onclick="nextStep(8)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 8: Facebook Account Link -->
+    <div class="step" id="step8">
+      <label for="facebookLink">ফেসবুক একাউন্ট লিংক (fake account গ্রহনযোগ্য নয়):</label>
+      <input type="url" name="facebookLink" id="facebookLink" required />
+      <button type="button" onclick="nextStep(9)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 9: Facebook Profile Verification -->
+    <div class="step" id="step9">
+      <label for="facebookLogo">টিম এর verification ফেসবুক প্রোফাইল এর জন্য টিম এর লোগো অ্যাড করতে রাজি আছি:</label>
+      <input type="checkbox" name="facebookLogo" id="facebookLogo" required />
+      <button type="button" onclick="nextStep(10)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 10: Birth Registration Number -->
+    <div class="step" id="step10">
+      <label for="birthRegNumber">জন্ম নিবন্ধন নম্বর:</label>
+      <input type="text" name="birthRegNumber" id="birthRegNumber" required />
+      <button type="button" onclick="nextStep(11)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 11: Date of Birth -->
+    <div class="step" id="step11">
+      <label for="dob">জন্ম তারিখ (নিবন্ধনের সাথে মিল থাকা উচিত):</label>
+      <input type="date" name="dob" id="dob" required />
+      <button type="button" onclick="nextStep(12)">পরবর্তী</button>
+    </div>
+
+    <!-- Step 12: Selfie Capture -->
+    <div class="step" id="step12">
       <label>আপনার সেলফি (ক্যামেরা চালু করুন ও ক্যাপচার করুন):</label>
       <video id="video" width="320" height="240" autoplay></video>
       <button type="button" onclick="capturePhoto()">📷 ক্যাপচার</button>
       <canvas id="canvas" width="320" height="240"></canvas>
       <input type="hidden" name="photo" id="photo" />
-      <button type="button" onclick="nextStep(4)">পরবর্তী</button>
+      <button type="button" onclick="nextStep(13)">পরবর্তী</button>
     </div>
-    <div class="step" id="step4">
+
+    <!-- Step 13: Video Upload -->
+    <div class="step" id="step13">
       <label>ভিডিও শপথ:</label>
       <textarea readonly>আমি (আপনার নাম), বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, Student Cyber Expert Force-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক...</textarea>
       <input type="file" name="video" accept="video/*" required />
@@ -70,6 +143,7 @@
 
   <script>
     let currentStep = 1;
+
     function nextStep(step) {
       document.getElementById(`step${currentStep}`).classList.remove('active');
       document.getElementById(`step${step}`).classList.add('active');
@@ -106,3 +180,4 @@
   </script>
 </body>
 </html>
+
