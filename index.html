@@ -122,7 +122,7 @@
 
   <!-- Step 8 -->
   <div class="form-group" id="step8">
-    <label for="previous_team">পূর্বে কোন টিম এ কাজ করেছেন : (করে থাকলে টিম এর নাম লিখুন)</label>
+    <label for="previous_team">পূর্বে কোন টিম এ কাজ করেছেন কি/না : (করে থাকলে টিম এর নাম লিখুন)</label>
     <input type="text" id="previous_team" name="previous_team" placeholder="করিনি/টিমের নাম লিখুন" oninput="showStep(9)">
   </div>
 
@@ -140,13 +140,13 @@
 
   <!-- Step 11 -->
   <div class="form-group" id="step11">
-    <label for="birth_certificate">জন্ম নিবন্ধন নম্বর:</label>
+    <label for="birth_certificate">আপনার জন্ম নিবন্ধন/আইডি কার্ড এর নম্বর:</label>
     <input type="text" id="birth_certificate" name="birth_certificate" placeholder="জন্ম নিবন্ধন নম্বর দিন" required oninput="showStep(12)">
   </div>
 
   <!-- Step 12 -->
   <div class="form-group" id="step12">
-    <label for="birth_date">জন্ম তারিখ:</label>
+    <label for="birth_date">জন্ম তারিখ(অবশই জন্ম নিবন্ধন বা আইডি কার্ডের সাথে মিল থাকতে হবে:</label>
     <input type="date" id="birth_date" name="birth_date" required onchange="showStep(13)">
   </div>
 
@@ -162,7 +162,7 @@
   
   <!-- Step 14 (video upload) -->
   <div class="form-group" id="step14">
-    <label for="oath_video">অবশই আপনাকে এই শপথ টি পাঠ করে ভিডিও করে জমা দিতে হবে:আমি(আপনার নাম), বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, Student Cyber Expert Force-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক। আমি মহান আল্লাহর নামে শপথ করছি যে, আমি কখনো কোনো অনৈতিক ও অবৈধ সাইবার কার্যকলাপে যুক্ত হব না। আমি সর্বদা ইসলাম ও আমার প্রিয় মাতৃভূমি বাংলাদেশের সাইবার নিরাপত্তা রক্ষায় সচেষ্ট থাকব এবং অপরাধ দমন ও মানুষের সেবা করতে সর্বোচ্চ চেষ্টা করব।</label>
+    <label for="oath_video">অবশই আপনাকে এই শপথ টি পাঠ করে ভিডিও করে জমা দিতে হবে:--আমি(আপনার নাম), বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, স্টুডেন্ট সাইবার এক্সপার্ট ফোর্স-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক। আমি মহান আল্লাহর নামে শপথ করছি যে, আমি কখনো কোনো অনৈতিক ও অবৈধ সাইবার কার্যকলাপে যুক্ত হব না। আমি সর্বদা ইসলাম ও আমার প্রিয় মাতৃভূমি বাংলাদেশের সাইবার নিরাপত্তা রক্ষায় সচেষ্ট থাকব এবং অপরাধ দমন ও মানুষের সেবা করতে সর্বোচ্চ চেষ্টা করব।</label>
     <input type="file" id="oath_video" name="oath_video" accept="video/*" required />
     <p class="note">ভিডিও ফাইল আপলোড করুন</p>
     <button type="button" onclick="showStep(15)">পরবর্তী</button>
