@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCEF Join Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      padding: 20px;
+    }
+    .step {
+      display: none;
+      margin-bottom: 20px;
+    }
+    .step.active {
+      display: block;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background: #0f0;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    video, canvas {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>SCEF Join Form</h1>
+  <form id="scefForm">
+    <div class="step active" id="step1">
+      <label>আপনার নাম:</label>
+      <input type="text" name="name" required />
+      <button type="button" onclick="nextStep(2)">পরবর্তী</button>
+    </div>
+    <div class="step" id="step2">
+      <label>অভিভাবকের নাম:</label>
+      <input type="text" name="guardian" required />
+      <button type="button" onclick="nextStep(3)">পরবর্তী</button>
+    </div>
+    <div class="step" id="step3">
+      <label>আপনার সেলফি (ক্যামেরা চালু করুন ও ক্যাপচার করুন):</label>
+      <video id="video" width="320" height="240" autoplay></video>
+      <button type="button" onclick="capturePhoto()">📷 ক্যাপচার</button>
+      <canvas id="canvas" width="320" height="240"></canvas>
+      <input type="hidden" name="photo" id="photo" />
+      <button type="button" onclick="nextStep(4)">পরবর্তী</button>
+    </div>
+    <div class="step" id="step4">
+      <label>ভিডিও শপথ:</label>
+      <textarea readonly>আমি (আপনার নাম), বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, Student Cyber Expert Force-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক...</textarea>
+      <input type="file" name="video" accept="video/*" required />
+      <button type="submit">সাবমিট</button>
+    </div>
+  </form>
+
+  <script>
+    let currentStep = 1;
+    function nextStep(step) {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.getElementById(`step${step}`).classList.add('active');
+      currentStep = step;
+    }
+
+    // Camera capture
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photoInput = document.getElementById('photo');
+
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (error) {
+          alert("ক্যামেরা চালু করা যাচ্ছে না");
+        });
+    }
+
+    function capturePhoto() {
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, 320, 240);
+      const dataURL = canvas.toDataURL('image/png');
+      photoInput.value = dataURL;
+    }
+
+    document.getElementById("scefForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("✅ সাবমিট সম্পন্ন। আপনার ভেরিফিকেশন প্রক্রিয়া চলতেছে। ইমেইল চেক করুন!");
+      // এখানে Google Apps Script বা webhook call করে submit data পাঠানো যাবে
+    });
+  </script>
+</body>
+</html>
