@@ -145,6 +145,7 @@
     let currentStep = 1;
 
     function nextStep(step) {
+      // Hide the current step but keep it in the page flow
       document.getElementById(`step${currentStep}`).classList.remove('active');
       document.getElementById(`step${step}`).classList.add('active');
       currentStep = step;
@@ -180,4 +181,3 @@
   </script>
 </body>
 </html>
-
