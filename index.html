@@ -85,8 +85,8 @@
 
   <!-- Step 2 -->
   <div class="form-group" id="step2">
-    <label for="father_name">পিতার নাম:</label>
-    <input type="text" id="father_name" name="father_name" placeholder="আপনার বাবার নাম দিন" required oninput="showStep(3)">
+    <label for="father_name">অভিবাবকের নাম:</label>
+    <input type="text" id="father_name" name="father_name" placeholder="আপনার অভিবাবকের নাম দিন" required oninput="showStep(3)">
   </div>
 
   <!-- Step 3 -->
@@ -102,38 +102,39 @@
   </div>
 
   <!-- Step 5 -->
-  <div class="form-group" id="step5">
-    <label for="email">ইমেইল:</label>
-    <input type="email" id="email" name="email" placeholder="ইমেইল লিখুন" required pattern=".+@gmail\.com" oninput="showStep(6)">
-  </div>
+<div class="form-group" id="step5">
+  <label for="email">ইমেইল:</label>
+  <input type="email" id="email" name="email" placeholder="ইমেইল লিখুন" required pattern=".+@gmail\.com" oninput="showStep(6)">
+</div>
 
-  <!-- Step 6 -->
-  <div class="form-group" id="step6">
-    <label for="parent_mobile">মোবাইল নম্বর:</label>
-    <input type="text" id="parent_mobile" name="parent_mobile" placeholder="আপনার মোবাইল নম্বর লিখুন" required oninput="showStep(7)">
-  </div>
+<!-- Step 6 -->
+<div class="form-group" id="step6">
+  <label for="parent_mobile">মোবাইল নম্বর:</label>
+  <input type="text" id="parent_mobile" name="parent_mobile" placeholder="আপনার মোবাইল নম্বর লিখুন" required pattern="^[0-9]{11}$" title="মোবাইল নম্বর ১১ ডিজিটের হতে হবে" oninput="showStep(7)">
+</div>
 
-  <!-- Step 7 -->
-  <div class="form-group" id="step7">
-    <label for="guardian_mobile">অভিবাকের মোবাইল নম্বর:</label>
-    <input type="text" id="guardian_mobile" name="guardian_mobile" placeholder="অভিবাকের মোবাইল নম্বর লিখুন" required oninput="showStep(8)">
-  </div>
+<!-- Step 7 -->
+<div class="form-group" id="step7">
+  <label for="guardian_mobile">অভিবাকের মোবাইল নম্বর:</label>
+  <input type="text" id="guardian_mobile" name="guardian_mobile" placeholder="অভিবাকের মোবাইল নম্বর লিখুন" required pattern="^[0-9]{11}$" title="মোবাইল নম্বর ১১ ডিজিটের হতে হবে" oninput="showStep(8)">
+</div>
+
 
   <!-- Step 8 -->
   <div class="form-group" id="step8">
     <label for="previous_team">পূর্বে কোন টিম এ কাজ করেছেন : (করে থাকলে টিম এর নাম লিখুন)</label>
-    <input type="text" id="previous_team" name="previous_team" placeholder="টিমের নাম লিখুন" oninput="showStep(9)">
+    <input type="text" id="previous_team" name="previous_team" placeholder="করিনি/টিমের নাম লিখুন" oninput="showStep(9)">
   </div>
 
   <!-- Step 9 -->
   <div class="form-group" id="step9">
     <label for="facebook_link">ফেসবুক একাউন্ট লিংক :</label>
-    <input type="url" id="facebook_link" name="facebook_link" placeholder="ফেসবুক লিংক দিন" required oninput="showStep(10)">
+    <input type="url" id="facebook_link" name="facebook_link" placeholder="ফেইক আইডি গ্রহণযোগ্য নয়" required oninput="showStep(10)">
   </div>
 
   <!-- Step 10 -->
   <div class="form-group" id="step10">
-    <label for="verification">টিম এর verification ফেসবুক প্রোফাইল  এর জন্য টিম এর লোগো অ্যাড করতে রাজি আছি:</label>
+    <label for="verification">টিম এর পরিচিতির জন্য আপনার ফেসবুক প্রোফাইল এ টিম এর লোগো অ্যাড করতে আপনি সম্মতি কি/না:</label>
     <input type="text" id="verification" name="verification" placeholder="হ্যা আমি সম্মতি আছি/আমি এই বিষয়ে কথা বলতে চাই" required oninput="showStep(11)">
   </div>
 
@@ -182,7 +183,7 @@
 <!-- Confirmation -->
 <div class="form-group" id="confirmationMessage" style="display:none; text-align:center;">
   <h2>🎉 অভিনন্দন!</h2>
-  <p>আপনার ফর্ম সফলভাবে জমা হয়েছে।</p>
+  <p>আপনার ফর্ম সফলভাবে জমা হয়েছে। আপনার ফর্মটি যাচাই করার পর আপনাকে জানানো হবে। অনুগ্রহ করে অপেক্ষা করুন </p>
   <p>আপনার ইউনিক আইডি: <strong id="generatedID"></strong></p>
 </div>
 
@@ -236,3 +237,4 @@
 
 </body>
 </html>
+ert
