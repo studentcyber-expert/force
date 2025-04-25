@@ -75,7 +75,7 @@
 <body>
 
 <h2>SCEF Joining Form</h2>
-<form id="scefForm" method="POST" action="submit.php" enctype="multipart/form-data">
+<form id="scefForm" method="POST" action="submit.php" enctype="multipart/form-data" onsubmit="submitForm(event)">
 
   <!-- Step 1 -->
   <div class="form-group visible" id="step1">
@@ -115,8 +115,8 @@
 
   <!-- Step 7 -->
   <div class="form-group" id="step7">
-    <label for="parent_mobile">অভিবাকের মোবাইল নম্বর:</label>
-    <input type="text" id="parent_mobile" name="parent_mobile" placeholder="অভিবাকের মোবাইল নম্বর লিখুন" required oninput="showStep(8)">
+    <label for="guardian_mobile">অভিবাকের মোবাইল নম্বর:</label>
+    <input type="text" id="guardian_mobile" name="guardian_mobile" placeholder="অভিবাকের মোবাইল নম্বর লিখুন" required oninput="showStep(8)">
   </div>
 
   <!-- Step 8 -->
@@ -164,20 +164,27 @@
     <label for="oath_video">অবশই আপনাকে এই শপথ টি পাঠ করে ভিডিও করে জমা দিতে হবে:আমি(আপনার নাম), বাংলাদেশের একজন দায়িত্বশীল নাগরিক হিসেবে, Student Cyber Expert Force-এর একজন নিবেদিত সদস্য হতে ইচ্ছুক। আমি মহান আল্লাহর নামে শপথ করছি যে, আমি কখনো কোনো অনৈতিক ও অবৈধ সাইবার কার্যকলাপে যুক্ত হব না। আমি সর্বদা ইসলাম ও আমার প্রিয় মাতৃভূমি বাংলাদেশের সাইবার নিরাপত্তা রক্ষায় সচেষ্ট থাকব এবং অপরাধ দমন ও মানুষের সেবা করতে সর্বোচ্চ চেষ্টা করব।</label>
     <input type="file" id="oath_video" name="oath_video" accept="video/*" required />
     <p class="note">ভিডিও ফাইল আপলোড করুন</p>
- <button type="button" onclick="showStep(15)">পরবর্তী</button>
+    <button type="button" onclick="showStep(15)">পরবর্তী</button>
   </div>
 
   <!-- Step 15 (with checkbox and submit) -->
   <div class="form-group" id="step15">
     <label>আমি টিমের প্রতি সর্বদা সম্মান বা শ্রদ্ধা বজায় রাখবো, এবং টিমের সকল আইন মেনে চলবো। আমি নিশ্চিত যে, আমি যেকোনো পরিস্থিতিতে টিমের সুনাম রক্ষা করবো এবং সকল সদস্যের প্রতি সহানুভূতি ও সমর্থন দেখাবো। এই বিষয়ে সম্মতি প্রদান করছি:</label>
     <div class="checkbox-group">
-      <input type="checkbox" id="teamRespectConsent" name="teamRespectConsent">
+      <input type="checkbox" id="teamRespectConsent" name="teamRespectConsent" required>
       <label for="teamRespectConsent">হ্যাঁ, আমি সম্মত আছি</label>
     </div>
     <button type="submit">✅ জমা দিন</button>
   </div>
 
 </form>
+
+<!-- Confirmation -->
+<div class="form-group" id="confirmationMessage" style="display:none; text-align:center;">
+  <h2>🎉 অভিনন্দন!</h2>
+  <p>আপনার ফর্ম সফলভাবে জমা হয়েছে।</p>
+  <p>আপনার ইউনিক আইডি: <strong id="generatedID"></strong></p>
+</div>
 
 <script>
   function showStep(step) {
@@ -203,6 +210,28 @@
     .catch(function(err) {
       console.log('Error accessing camera: ' + err);
     });
+
+  // ID Generator
+  function generateUniqueID() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let id = "SCEF-";
+    for (let i = 0; i < 6; i++) {
+      id += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return id;
+  }
+
+  // Submit
+  function submitForm(event) {
+    event.preventDefault();
+    const form = document.getElementById("scefForm");
+    if (!form.reportValidity()) return;
+
+    form.style.display = "none";
+    const uniqueID = generateUniqueID();
+    document.getElementById("generatedID").textContent = uniqueID;
+    document.getElementById("confirmationMessage").style.display = "block";
+  }
 </script>
 
 </body>
