@@ -1,1 +1,41 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SCEF Step Form</title>
+  <style>
+    body { font-family: Arial; background: #0d0d0d; color: #00ffcc; padding: 20px; }
+    input, button, textarea, select { margin: 10px 0; display: block; width: 100%; padding: 10px; background: #1a1a1a; color: white; border: 1px solid #00ffcc; border-radius: 5px; }
+    button { background: #00ffcc; color: black; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>SCEF Joining Form</h2>
+  <form id="scefForm">
+    <input type="text" name="name" placeholder="Full Name" required />
+    <input type="text" name="father_name" placeholder="Father's Name" required />
+    <input type="text" name="address" placeholder="Current Address" required />
+    <input type="text" name="permanent_address" placeholder="Permanent Address" required />
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="text" name="parent_mobile" placeholder="Parent's Mobile" required />
+    <input type="text" name="guardian_mobile" placeholder="Guardian's Mobile" required />
+    <input type="text" name="previous_team" placeholder="Previous Cyber Team" />
+    <input type="text" name="facebook_link" placeholder="Facebook Profile Link" required />
+    <select name="verification">
+      <option value="Self Verified">Self Verified</option>
+      <option value="Guardian Verified">Guardian Verified</option>
+    </select>
+    <input type="text" name="birth_certificate" placeholder="Birth Certificate No." />
+    <input type="date" name="birth_date" placeholder="Birth Date" required />
+    <input type="text" name="photo" placeholder="Photo URL" required />
+    <select name="teamRespectConsent">
+      <option value="Will Add Logo">Will Add SCEF Logo</option>
+      <option value="Will Discuss">Will Discuss Later</option>
+    </select>
+    <input type="file" id="oath_video" accept="video/*" required />
+    <button type="submit">Submit</button>
+  </form>
+  <div id="message"></div>
+  <script src="script.js"></script>
+</body>
+</html>
