@@ -187,6 +187,8 @@
   <p>আপনার ইউনিক আইডি: <strong id="generatedID"></strong></p>
 </div>
 
+<!-- তোমার HTML কোড সব ঠিক আছে, শুধু নিচের JavaScript অংশটা আগেরটাকে replace করে বসাও -->
+
 <script>
   function showStep(step) {
     document.getElementById("step" + step).classList.add("visible");
@@ -228,10 +230,24 @@
     const form = document.getElementById("scefForm");
     if (!form.reportValidity()) return;
 
-    form.style.display = "none";
     const uniqueID = generateUniqueID();
-    document.getElementById("generatedID").textContent = uniqueID;
-    document.getElementById("confirmationMessage").style.display = "block";
+    const formData = new FormData(form);
+    formData.append("uniqueID", uniqueID);
+
+    fetch("https://script.google.com/macros/s/AKfycbxY4sH2U5XhMx2axiKaZ6jSvfhpoO67tpe3L3W5zm-Ncz5m0PsBHglN0W94jhyQaxKlZw/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      form.style.display = "none";
+      document.getElementById("generatedID").textContent = uniqueID;
+      document.getElementById("confirmationMessage").style.display = "block";
+    })
+    .catch(error => {
+      alert("❌ ডেটা পাঠাতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      console.error("Error:", error);
+    });
   }
 </script>
 
